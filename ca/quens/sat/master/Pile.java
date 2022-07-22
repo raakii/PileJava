@@ -1,32 +1,40 @@
-class Pile{
+package ca.quens.sat.master;
+public class Pile{
  
     int sommet;
+    int capacite;
     int[] piles;
  
-    Pile(int capacite){
+    public Pile(int capacite){
+      this.capacite = capacite;
       piles = new int[capacite];   //créer une nouvelle pile vide de taille maximal capacite
       sommet = -1;  //lorsque tu auras empiler un élément tu l'obtiendras à piles[0]
     }
  
-    int getSommet(){
+    public int getSommet(){
+      if(estVide()) {
+        throw new Error("La pile est vide. Il n'y as pas de sommet.");
+      }
+       else {
         return piles[sommet];
+       } 
     }
  
-    boolean estVide(){
+    public boolean estVide(){
       if(sommet == -1){
         return true;
       }
       return false;
     }
  
-    boolean estPleine(){
+    public boolean estPleine(){
       if(sommet == piles.length){
         return true;
       }
       return false;
     }
      
-    void empile(int element){
+    public void empile(int element){
       if (estPleine()){
          new  Error("La pile est pleine impossible d'empiler");
       }
@@ -34,7 +42,7 @@ class Pile{
       sommet++;
     }
  
-    int depile(){
+    public int depile(){
       if (estVide()){
        new  Error("La pile est vide impossible de depiler");
       }
@@ -42,7 +50,7 @@ class Pile{
       return piles[sommet+1];      //on retourne la valeur que nous avons depiler
     }
  
-    String versChaine(){ //Pour visualiser ta pile
+    public String versChaine(){ //Pour visualiser ta pile
       if(estVide()){
         return "[]";
       }
