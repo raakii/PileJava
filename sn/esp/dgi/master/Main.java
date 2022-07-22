@@ -14,7 +14,7 @@ public class Main {
         p.empile(4);
         System.out.println(p.getSommet());
 
-        Fraction f = new Fraction(2, 3);
+        Fraction f = new Fraction(-2, 4);
         f.afficher();
 
     
