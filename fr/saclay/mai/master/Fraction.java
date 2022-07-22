@@ -35,19 +35,7 @@ public Fraction(int num, int den) {
 		{
 			int n1=this.den;
 			int n2=this.num;
-			int temp1 = n1;
-			int temp2 = n2; 
- 
-			while (n1 != n2){
-			if(n1 > n2)
-				 n1 = n1 - n2;
-		  		else
-			 n2 = n2 - n1;
-		}      
- 
-	   int n3 = temp1 / n1 ;
-	   int n4 = temp2 / n1 ;
-			return new Fraction(n3,n4);
+			return reduce(new Fraction(n1, n2));
 		} 
 		else return null; 
 		}
@@ -71,7 +59,7 @@ public Fraction(int num, int den) {
 	public Fraction Plus(Fraction f){
 		int n2=this.den * f.den;
 		int n1=(this.num * f.den)+(f.num * this.den);
-		Fraction fractionadd = new Fraction(n1,n2);
+		Fraction fractionadd = reduce(new Fraction(n1,n2));
 		return fractionadd;
 	}
 /**
@@ -83,19 +71,8 @@ public Fraction(int num, int den) {
 
 		int n2=this.den * f.den;
 		int n1=(this.num * f.den) - (f.num * this.den);
-		int temp1 = n1;
-		int temp2 = n2; 
- 
-		while (n1!=n2){
-		  if(n1 > n2)
-			 n1 = n1 - n2;
-		  else
-			 n2 = n2 - n1;
-		}      
- 
-	   int n3 = temp1 / n2 ;
-	   int n4 = temp2 / n2 ;
-		Fraction fractionmoins = new Fraction(n3,n4);
+		
+		Fraction fractionmoins = reduce(new Fraction(n1, n2));
 		return fractionmoins;
 	}
 /**
@@ -107,19 +84,8 @@ public Fraction(int num, int den) {
 	public Fraction MultipliePar(Fraction f){
 		int n1 = this.den * f.den;
 		int n2 = this.num*f.num;
-		int temp1 = n1;
-		int temp2 = n2; 
- 
-		while (n1 != n2){
-		  if(n1 > n2)
-			 n1 = n1 - n2;
-		  else
-			 n2 = n2 - n1;
-		}      
- 
-	   int n3 = temp1 / n1 ;
-	   int n4 = temp2 / n1 ;
-		Fraction fractionproduit = new Fraction(n3,n4);
+		
+		Fraction fractionproduit = reduce(new Fraction(n1,n2));
 		return fractionproduit;
 	}
 /**
@@ -130,36 +96,33 @@ public Fraction(int num, int den) {
 	public Fraction DiviserPar(Fraction f){
 		int n1 = this.num * f.den;
 		int n2 = this.den * f.num;
-		int temp1 = n1;
-		int temp2 = n2; 
- 
-		while (n1 != n2){
-		  if(n1 > n2)
-			 n1 = n1 - n2;
-		  else
-			 n2 = n2 - n1;
-		}      
- 
-	   int n3 = temp1 / n1 ;
-	   int n4 = temp2 / n1 ;
-		Fraction fractiondiv = new Fraction(n3,n4);
+
+	   
+		Fraction fractiondiv = reduce(new Fraction(n1, n2));
 		return fractiondiv;
 	}
-	public static Fraction simplify (Fraction f){
-		int n1 = f.num;
-		int n2 = f.den; 
-		int temp1 = n1;
-		int temp2 = n2; 
- 
-		while (n1 != n2){
-		  if(n1 > n2)
-			 n1 = n1 - n2;
-		  else
-			 n2 = n2 - n1;
-		}      
- 
-	   int n3 = temp1 / n1 ;
-	   int n4 = temp2 / n1 ;
-	return(new Fraction(n3, n4));
+	private static int gcd(int a, int b) {
+		while (a != b) {
+		   if (a > b) {
+			   a -= b;
+		   } else {
+			   b -= a;
+		   }
+	   }
+	   return a;
+   }
+	private static Fraction reduce(Fraction f) {
+		int num=f.num;
+		int den=f.den;
+		boolean neg = (num < 0) != (den < 0);
+		num = Math.abs(num);
+		den = Math.abs(den);
+		// obtain the GCD of the non-negative values.
+		int g = gcd(num, den);
+	
+		num /= g;
+		den /= g;
+		if (neg) num *= -1;
+		return(new Fraction(num, den));
 	}
 }

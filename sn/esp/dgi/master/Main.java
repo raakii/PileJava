@@ -22,5 +22,5 @@ public class Main {
 
 
 }
-// javac -d "./bin"   ./sn/esp/dgi/master/Main.java   
-// java -cp "./bin" sn.esp.dgi.master.Main 
+// javac -d "./bin"   ./sn/esp/dgi/master/Main.java  // Raki li moy compiler 
+// java -cp "./bin" sn.esp.dgi.master.Main // Raki li moy executer
