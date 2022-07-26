@@ -11,9 +11,18 @@ package fr.saclay.mai.master;
  */
 public class Fraction {
 	/* Champs1: numerateur */
-	int num;
+	public int num;
 	/* Champs1: dénominateur */
-	int den;
+	public int den;
+
+	public void setFraction(Fraction f) {
+		this.num = f.num;
+		this.den = f.den;
+	}
+
+	public Fraction getFraction() {
+		return this;
+	}
 
 	/**
 	 * Contructeur de la classe
@@ -49,16 +58,12 @@ public class Fraction {
 	 * Permet d'afficher la fraction sur laquelle elle est appelée
 	 *
 	 */
-	public void afficher() {
+	public String afficher() {
 		int n1 = this.num;
 		int n2 = this.den;
 		Fraction aff = reduce(new Fraction(n1, n2));
-		
-		System.out.println("la fraction est:"+aff.num +"/"+ aff.den);
-			
+		return ("la fraction est:" + aff.num / aff.den);
 
-		
-			
 	}
 
 	/**
@@ -98,7 +103,7 @@ public class Fraction {
 		int n1 = this.den * f.den;
 		int n2 = this.num * f.num;
 
-		Fraction fractionproduit = reduce(new Fraction(n1, n2));
+		Fraction fractionproduit = reduce(new Fraction(n2, n1));
 		return fractionproduit;
 	}
 
@@ -115,7 +120,7 @@ public class Fraction {
 		return fractiondiv;
 	}
 
-	private static int gcd(int a, int b) {
+	public static int gcd(int a, int b) {
 		while (a != b) {
 			if (a > b) {
 				a -= b;
@@ -126,7 +131,7 @@ public class Fraction {
 		return a;
 	}
 
-	private static Fraction reduce(Fraction f) {
+	public static Fraction reduce(Fraction f) {
 		int num = f.num;
 		int den = f.den;
 		boolean neg = (num < 0) != (den < 0);
